@@ -1,0 +1,17 @@
+{
+  "name": "apex-auto-care-backend",
+  "version": "1.0.0",
+  "description": "Zero-config Vercel serverless API for the Apex Auto Care landing page.",
+  "private": true,
+  "engines": {
+    "node": ">=18.x"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "vercel-dev": "vercel dev"
+  },
+  "devDependencies": {
+    "vercel": "^37.0.0"
+  }
+}

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apex Auto Care | Precision Auto Care & Ceramic Detailing</title>
+<meta name="description" content="ASE-certified mechanics and ceramic detailing specialists. Fast turnaround, warrantied work, 5,000+ cars serviced." />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Rajdhani', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+        },
+        colors: {
+          ink: '#0b1120',
+          panel: '#111a2e',
+          panel2: '#16213a',
+          amber: {
+            400: '#fbbf24',
+            500: '#f59e0b',
+          },
+        },
+        clipPath: {
+          diagonal: 'polygon(0 0, 100% 0, 100% 88%, 0 100%)',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #0b1120; }
+  .font-display { letter-spacing: 0.01em; }
+  .diagonal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+  .diagonal-cut-top {
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+  }
+  .tread-divider {
+    height: 6px;
+    background-image: repeating-linear-gradient(115deg, #f59e0b 0 14px, transparent 14px 28px);
+    opacity: 0.5;
+  }
+  .glow-amber:hover {
+    box-shadow: 0 0 0 1px rgba(245,158,11,0.4), 0 20px 40px -12px rgba(245,158,11,0.25);
+  }
+  .num-dial {
+    font-variant-numeric: tabular-nums;
+  }
+  ::selection { background: #f59e0b; color: #0b1120; }
+  input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  .before-after-swipe {
+    position: relative;
+    overflow: hidden;
+  }
+  .before-after-swipe .after-layer {
+    position: absolute;
+    inset: 0;
+    width: 50%;
+    overflow: hidden;
+    border-right: 2px solid #f59e0b;
+  }
+  .mobile-menu { transition: max-height 0.3s ease, opacity 0.2s ease; }
+</style>
+</head>
+
+<body class="bg-ink text-slate-200 font-body antialiased">
+
+<!-- ============ NAVBAR ============ -->
+<header class="fixed top-0 inset-x-0 z-50 bg-ink/90 backdrop-blur border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+
+      <!-- Logo -->
+      <a href="#top" class="flex items-center gap-2 shrink-0">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-md bg-amber-500 text-ink">
+          <i data-lucide="gauge-circle" class="w-5 h-5"></i>
+        </span>
+        <span class="font-display text-xl font-700 text-white tracking-wide">APEX <span class="text-amber-500">AUTO CARE</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-8 font-medium text-sm text-slate-300">
+        <a href="#services" class="hover:text-amber-400 transition-colors">Services</a>
+        <a href="#packages" class="hover:text-amber-400 transition-colors">Packages</a>
+        <a href="#why-us" class="hover:text-amber-400 transition-colors">Why Us</a>
+        <a href="#reviews" class="hover:text-amber-400 transition-colors">Reviews</a>
+        <a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Desktop CTAs -->
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="tel:+15551234911" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-red-500/40 text-red-400 hover:bg-red-500/10 transition-colors text-sm font-semibold">
+          <i data-lucide="phone-call" class="w-4 h-4"></i>
+          Emergency Call
+        </a>
+        <a href="#booking" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-amber-500 text-ink font-bold text-sm hover:bg-amber-400 transition-colors">
+          Book Appointment
+        </a>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-white/10 text-slate-200">
+        <i data-lucide="menu" class="w-5 h-5" id="menuIconOpen"></i>
+        <i data-lucide="x" class="w-5 h-5 hidden" id="menuIconClose"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu lg:hidden overflow-hidden max-h-0 opacity-0 border-t border-white/5 bg-ink">
+    <nav class="px-4 py-4 flex flex-col gap-1 text-slate-300 font-medium">
+      <a href="#services" class="py-2.5 border-b border-white/5">Services</a>
+      <a href="#packages" class="py-2.5 border-b border-white/5">Packages</a>
+      <a href="#why-us" class="py-2.5 border-b border-white/5">Why Us</a>
+      <a href="#reviews" class="py-2.5 border-b border-white/5">Reviews</a>
+      <a href="#contact" class="py-2.5">Contact</a>
+      <div class="flex flex-col gap-2 mt-3">
+        <a href="tel:+15551234911" class="text-center px-4 py-2.5 rounded-md border border-red-500/40 text-red-400 font-semibold">Emergency Call</a>
+        <a href="#booking" class="text-center px-4 py-2.5 rounded-md bg-amber-500 text-ink font-bold">Book Appointment</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="relative pt-28 lg:pt-40 pb-20 lg:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <!-- background texture -->
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_20%,rgba(245,158,11,0.10),transparent_45%),radial-gradient(circle_at_85%_0%,rgba(220,38,38,0.10),transparent_40%)]"></div>
+    <div class="absolute -right-24 top-10 w-[420px] h-[420px] rounded-full bg-amber-500/10 blur-3xl -z-10"></div>
+
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-start">
+      <div>
+        <p class="inline-flex items-center gap-2 text-amber-400 font-display font-semibold text-sm tracking-wide mb-5">
+          <i data-lucide="wrench" class="w-4 h-4"></i>
+          ASE-Certified Workshop &mdash; Est. Downtown Auto District
+        </p>
+        <h1 class="font-display font-700 text-white text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-6">
+          Precision Auto Care<br class="hidden sm:block" /> & Ceramic Detailing
+        </h1>
+        <p class="text-lg text-slate-400 max-w-xl mb-8 leading-relaxed">
+          Certified mechanics diagnose it right the first time. Most services turn around same-day, and every repair carries our 12-month warranty &mdash; no surprises, no comebacks.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mb-10">
+          <a href="#booking" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-amber-500 text-ink font-bold hover:bg-amber-400 transition-colors">
+            <i data-lucide="calendar-check" class="w-5 h-5"></i>
+            Book Appointment
+          </a>
+          <a href="#estimator" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-md border border-white/15 text-white font-semibold hover:border-amber-400 hover:text-amber-400 transition-colors">
+            <i data-lucide="calculator" class="w-5 h-5"></i>
+            Estimate My Cost
+          </a>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="grid grid-cols-3 gap-4 max-w-lg border-t border-white/10 pt-6">
+          <div>
+            <p class="font-display num-dial text-2xl sm:text-3xl font-700 text-white">5,000+</p>
+            <p class="text-xs text-slate-500 mt-1">Cars Serviced</p>
+          </div>
+          <div>
+            <p class="font-display num-dial text-2xl sm:text-3xl font-700 text-white">ASE</p>
+            <p class="text-xs text-slate-500 mt-1">Certified Techs</p>
+          </div>
+          <div>
+            <p class="font-display num-dial text-2xl sm:text-3xl font-700 text-white flex items-center gap-1">4.9<i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i></p>
+            <p class="text-xs text-slate-500 mt-1">Average Rating</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking widget -->
+      <div id="booking" class="bg-panel border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-black/40 scroll-mt-24">
+        <h2 class="font-display text-2xl font-700 text-white mb-1">Get a Quick Quote</h2>
+        <p class="text-sm text-slate-500 mb-6">Tell us about your vehicle &mdash; we'll confirm your slot by phone.</p>
+
+        <form class="space-y-4" onsubmit="handleBooking(event)">
+          <div>
+            <label for="carModel" class="block text-sm font-medium text-slate-300 mb-1.5">Car make &amp; model</label>
+            <input id="carModel" name="carModel" type="text" required placeholder="e.g. Honda Civic 2019"
+              class="w-full rounded-md bg-panel2 border border-white/10 px-4 py-2.5 text-white placeholder:text-slate-600 focus:border-amber-500" />
+          </div>
+          <div>
+            <label for="serviceNeeded" class="block text-sm font-medium text-slate-300 mb-1.5">Service needed</label>
+            <select id="serviceNeeded" name="serviceNeeded" required
+              class="w-full rounded-md bg-panel2 border border-white/10 px-4 py-2.5 text-white focus:border-amber-500">
+              <option value="">Select a service</option>
+              <option>Oil & Filter Change</option>
+              <option>Brake Service</option>
+              <option>Engine Diagnostics</option>
+              <option>Ceramic Coating / Paint Protection</option>
+              <option>AC Repair</option>
+              <option>Tire Alignment</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="prefDate" class="block text-sm font-medium text-slate-300 mb-1.5">Preferred date</label>
+              <input id="prefDate" name="prefDate" type="date" required
+                class="w-full rounded-md bg-panel2 border border-white/10 px-3 py-2.5 text-white focus:border-amber-500" />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium text-slate-300 mb-1.5">Phone number</label>
+              <input id="phone" name="phone" type="tel" required placeholder="(555) 123-4567"
+                class="w-full rounded-md bg-panel2 border border-white/10 px-3 py-2.5 text-white placeholder:text-slate-600 focus:border-amber-500" />
+            </div>
+          </div>
+          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-md bg-amber-500 text-ink font-bold hover:bg-amber-400 transition-colors">
+            Request Appointment
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+          <p class="text-xs text-slate-600 text-center">No payment required now &mdash; we confirm availability first.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="tread-divider"></div>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="services" class="py-20 lg:py-28 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-2xl mb-12">
+        <h2 class="font-display font-700 text-3xl sm:text-4xl text-white mb-3">Our Services</h2>
+        <p class="text-slate-400">Every job is logged, photographed, and backed by a 12-month warranty on parts and labor.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ PACKAGES / PRICING ============ -->
+  <section id="packages" class="py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-panel/40 scroll-mt-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-2xl mb-14">
+        <h2 class="font-display font-700 text-3xl sm:text-4xl text-white mb-3">Service Packages</h2>
+        <p class="text-slate-400">Bundled maintenance plans that cost less than booking each service separately.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6 items-start">
+
+        <!-- Basic -->
+        <div class="bg-panel border border-white/10 rounded-2xl p-8 flex flex-col h-full">
+          <h3 class="font-display text-xl font-700 text-white mb-1">Basic Maintenance</h3>
+          <p class="text-sm text-slate-500 mb-5">Routine upkeep to keep small issues small.</p>
+          <p class="mb-6"><span class="font-display text-4xl font-700 text-white">$89</span><span class="text-slate-500 text-sm"> /visit</span></p>
+          <ul class="space-y-3 mb-8 text-sm text-slate-300">
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Full synthetic oil & filter change</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>21-point safety inspection</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Tire pressure & tread check</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Fluid top-off</li>
+          </ul>
+          <button onclick="selectPackage('Basic Maintenance')" class="mt-auto w-full py-3 rounded-md border border-white/15 text-white font-semibold hover:border-amber-400 hover:text-amber-400 transition-colors">Select Package</button>
+        </div>
+
+        <!-- Full Service (highlighted) -->
+        <div class="relative bg-panel border-2 border-amber-500 rounded-2xl p-8 flex flex-col h-full lg:-translate-y-4 shadow-2xl shadow-amber-500/10">
+          <span class="absolute -top-3 left-8 bg-amber-500 text-ink text-xs font-bold px-3 py-1 rounded-full">Most Booked</span>
+          <h3 class="font-display text-xl font-700 text-white mb-1">Full Service Tune-Up</h3>
+          <p class="text-sm text-slate-500 mb-5">Comprehensive care for daily drivers.</p>
+          <p class="mb-6"><span class="font-display text-4xl font-700 text-white">$219</span><span class="text-slate-500 text-sm"> /visit</span></p>
+          <ul class="space-y-3 mb-8 text-sm text-slate-300">
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Everything in Basic Maintenance</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Brake pad & rotor inspection</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Battery & alternator test</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Computer engine diagnostics</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Wheel alignment check</li>
+          </ul>
+          <button onclick="selectPackage('Full Service Tune-Up')" class="mt-auto w-full py-3 rounded-md bg-amber-500 text-ink font-bold hover:bg-amber-400 transition-colors">Select Package</button>
+        </div>
+
+        <!-- Showroom Detailing -->
+        <div class="bg-panel border border-white/10 rounded-2xl p-8 flex flex-col h-full">
+          <h3 class="font-display text-xl font-700 text-white mb-1">Showroom Detailing Pack</h3>
+          <p class="text-sm text-slate-500 mb-5">Ceramic-grade finish, inside and out.</p>
+          <p class="mb-6"><span class="font-display text-4xl font-700 text-white">$349</span><span class="text-slate-500 text-sm"> /visit</span></p>
+          <ul class="space-y-3 mb-8 text-sm text-slate-300">
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Full exterior paint correction</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Ceramic coating application</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Deep interior shampoo & vacuum</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Engine bay detailing</li>
+            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>Headlight restoration</li>
+          </ul>
+          <button onclick="selectPackage('Showroom Detailing Pack')" class="mt-auto w-full py-3 rounded-md border border-white/15 text-white font-semibold hover:border-amber-400 hover:text-amber-400 transition-colors">Select Package</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COST ESTIMATOR ============ -->
+  <section id="estimator" class="py-20 lg:py-28 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+    <div class="max-w-5xl mx-auto">
+      <div class="max-w-2xl mb-10">
+        <h2 class="font-display font-700 text-3xl sm:text-4xl text-white mb-3">Instant Cost Estimator</h2>
+        <p class="text-slate-400">Pick your vehicle type and the services you need for a ballpark total. Final pricing is confirmed after inspection.</p>
+      </div>
+
+      <div class="bg-panel border border-white/10 rounded-2xl p-6 sm:p-10 grid lg:grid-cols-[1fr_320px] gap-10">
+        <div>
+          <p class="text-sm font-semibold text-slate-300 mb-3">Vehicle type</p>
+          <div class="grid grid-cols-3 gap-3 mb-8" id="vehicleTypeGroup" role="radiogroup" aria-label="Vehicle type">
+            <button type="button" data-vehicle="sedan" data-multiplier="1" class="vehicle-btn text-sm font-semibold py-3 rounded-md border border-white/15 text-slate-300 hover:border-amber-400" role="radio" aria-checked="true">Sedan</button>
+            <button type="button" data-vehicle="suv" data-multiplier="1.25" class="vehicle-btn text-sm font-semibold py-3 rounded-md border border-white/15 text-slate-300 hover:border-amber-400" role="radio" aria-checked="false">SUV</button>
+            <button type="button" data-vehicle="truck" data-multiplier="1.4" class="vehicle-btn text-sm font-semibold py-3 rounded-md border border-white/15 text-slate-300 hover:border-amber-400" role="radio" aria-checked="false">Truck</button>
+          </div>
+
+          <p class="text-sm font-semibold text-slate-300 mb-3">Services</p>
+          <div class="space-y-2" id="estimatorChecklist"></div>
+        </div>
+
+        <div class="bg-panel2 rounded-xl p-6 h-max lg:sticky lg:top-28">
+          <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Estimated total</p>
+          <p class="font-display text-5xl font-700 text-amber-400 mb-1" id="estimatorTotal">$0</p>
+          <p class="text-xs text-slate-600 mb-6" id="estimatorCount">0 services selected</p>
+          <a href="#booking" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-amber-500 text-ink font-bold hover:bg-amber-400 transition-colors">
+            Book This Estimate
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tread-divider"></div>
+
+  <!-- ============ WHY US ============ -->
+  <section id="why-us" class="py-20 lg:py-28 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
+      <div>
+        <h2 class="font-display font-700 text-3xl sm:text-4xl text-white mb-5">Why Drivers Choose Apex</h2>
+        <p class="text-slate-400 mb-8 leading-relaxed max-w-lg">
+          We built this shop around three things drivers care about most: honest diagnostics, work that's actually warrantied, and not losing your whole day waiting around.
+        </p>
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div class="w-11 h-11 shrink-0 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center"><i data-lucide="shield-check" class="w-5 h-5"></i></div>
+            <div>
+              <h3 class="text-white font-semibold mb-1">12-month warranty, every job</h3>
+              <p class="text-sm text-slate-500">Parts and labor covered &mdash; if it's our work, we stand behind it.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-11 h-11 shrink-0 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center"><i data-lucide="timer" class="w-5 h-5"></i></div>
+            <div>
+              <h3 class="text-white font-semibold mb-1">Same-day turnaround</h3>
+              <p class="text-sm text-slate-500">Most repairs and details are done before closing, not "next week."</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-11 h-11 shrink-0 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center"><i data-lucide="badge-check" class="w-5 h-5"></i></div>
+            <div>
+              <h3 class="text-white font-semibold mb-1">ASE-certified technicians</h3>
+              <p class="text-sm text-slate-500">Every tech on the floor holds current ASE certification.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-11 h-11 shrink-0 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center"><i data-lucide="receipt-text" class="w-5 h-5"></i></div>
+            <div>
+              <h3 class="text-white font-semibold mb-1">Upfront pricing, no surprises</h3>
+              <p class="text-sm text-slate-500">You approve the quote before we touch the car &mdash; period.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Before/After gallery -->
+      <div>
+        <p class="text-sm font-semibold text-slate-300 mb-4">Recent detailing transformations</p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="before-after-swipe rounded-xl h-48 sm:h-56 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+            <div class="after-layer bg-gradient-to-br from-amber-600/40 to-red-600/30 flex items-center justify-center">
+              <span class="text-[10px] font-bold uppercase tracking-wide text-amber-300">After</span>
+            </div>
+            <span class="absolute right-3 bottom-3 text-[10px] font-bold uppercase tracking-wide text-slate-400">Before</span>
+          </div>
+          <div class="before-after-swipe rounded-xl h-48 sm:h-56 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+            <div class="after-layer bg-gradient-to-br from-amber-600/40 to-red-600/30 flex items-center justify-center">
+              <span class="text-[10px] font-bold uppercase tracking-wide text-amber-300">After</span>
+            </div>
+            <span class="absolute right-3 bottom-3 text-[10px] font-bold uppercase tracking-wide text-slate-400">Before</span>
+          </div>
+          <div class="before-after-swipe rounded-xl h-48 sm:h-56 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center col-span-2">
+            <div class="after-layer bg-gradient-to-br from-amber-600/40 to-red-600/30 flex items-center justify-center">
+              <span class="text-[10px] font-bold uppercase tracking-wide text-amber-300">After</span>
+            </div>
+            <span class="absolute right-3 bottom-3 text-[10px] font-bold uppercase tracking-wide text-slate-400">Before</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-600 mt-3">Sample placeholders &mdash; swap in real project photos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section id="reviews" class="py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-panel/40 scroll-mt-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-2xl mb-12">
+        <h2 class="font-display font-700 text-3xl sm:text-4xl text-white mb-3">What Drivers Say</h2>
+        <p class="text-slate-400">4.9 out of 5 across 1,200+ verified reviews.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="bg-panel border border-white/10 rounded-xl p-6">
+          <div class="flex gap-0.5 mb-4 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-sm text-slate-300 mb-5 leading-relaxed">"Told me exactly what was wrong with the brakes and showed me the worn pads before doing anything. Done in three hours."</p>
+          <p class="text-sm font-semibold text-white">Marcus D.</p>
+          <p class="text-xs text-slate-500">Brake Service</p>
+        </div>
+        <div class="bg-panel border border-white/10 rounded-xl p-6">
+          <div class="flex gap-0.5 mb-4 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-sm text-slate-300 mb-5 leading-relaxed">"The ceramic coating looks better than the day I bought the car. Water just beads right off. Worth every dollar."</p>
+          <p class="text-sm font-semibold text-white">Priya S.</p>
+          <p class="text-xs text-slate-500">Showroom Detailing Pack</p>
+        </div>
+        <div class="bg-panel border border-white/10 rounded-xl p-6">
+          <div class="flex gap-0.5 mb-4 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-sm text-slate-300 mb-5 leading-relaxed">"Check-engine light came on during a road trip. They fit me in same day and had the diagnostic done in under an hour."</p>
+          <p class="text-sm font-semibold text-white">Owen R.</p>
+          <p class="text-xs text-slate-500">Engine Diagnostics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT & LOCATION ============ -->
+  <section id="contact" class="py-20 lg:py-28 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10">
+      <div>
+        <h2 class="font-display font-700 text-3xl sm:text-4xl text-white mb-6">Visit The Workshop</h2>
+
+        <div class="space-y-5 mb-8">
+          <div class="flex gap-4">
+            <i data-lucide="map-pin" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+            <p class="text-slate-300 text-sm">4820 Industrial Parkway, Unit 6<br />Riverside District</p>
+          </div>
+          <div class="flex gap-4">
+            <i data-lucide="clock" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+            <div class="text-slate-300 text-sm">
+              <p>Mon &ndash; Fri: 7:00 AM &ndash; 7:00 PM</p>
+              <p>Saturday: 8:00 AM &ndash; 5:00 PM</p>
+              <p>Sunday: Closed</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <i data-lucide="phone" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+            <p class="text-slate-300 text-sm">(555) 123-4911</p>
+          </div>
+        </div>
+
+        <a href="https://wa.me/15551234911" target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-green-600 text-white font-bold hover:bg-green-500 transition-colors">
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          Chat on WhatsApp
+        </a>
+      </div>
+
+      <!-- Map placeholder -->
+      <div class="rounded-2xl overflow-hidden border border-white/10 h-72 lg:h-full min-h-[280px] relative bg-panel2 flex items-center justify-center">
+        <div class="absolute inset-0 opacity-40 bg-[linear-gradient(rgba(245,158,11,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(245,158,11,0.08)_1px,transparent_1px)] bg-[size:28px_28px]"></div>
+        <div class="relative text-center px-6">
+          <i data-lucide="map" class="w-8 h-8 text-amber-400 mx-auto mb-3"></i>
+          <p class="text-sm text-slate-400">Interactive map loads here</p>
+          <p class="text-xs text-slate-600">4820 Industrial Parkway, Riverside District</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-white/10 pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    <div>
+      <a href="#top" class="flex items-center gap-2 mb-4">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-md bg-amber-500 text-ink"><i data-lucide="gauge-circle" class="w-4 h-4"></i></span>
+        <span class="font-display text-lg font-700 text-white">APEX <span class="text-amber-500">AUTO CARE</span></span>
+      </a>
+      <p class="text-sm text-slate-500 leading-relaxed">Precision repair and ceramic detailing, backed by a 12-month warranty on every job.</p>
+    </div>
+
+    <div>
+      <h4 class="text-white font-semibold text-sm mb-4">Quick Links</h4>
+      <ul class="space-y-2 text-sm text-slate-500">
+        <li><a href="#services" class="hover:text-amber-400">Services</a></li>
+        <li><a href="#packages" class="hover:text-amber-400">Packages</a></li>
+        <li><a href="#why-us" class="hover:text-amber-400">Why Us</a></li>
+        <li><a href="#reviews" class="hover:text-amber-400">Reviews</a></li>
+        <li><a href="#contact" class="hover:text-amber-400">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-white font-semibold text-sm mb-4">Follow Us</h4>
+      <div class="flex gap-3">
+        <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-md border border-white/10 flex items-center justify-center hover:border-amber-400 hover:text-amber-400"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+        <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-md border border-white/10 flex items-center justify-center hover:border-amber-400 hover:text-amber-400"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+        <a href="#" aria-label="Twitter" class="w-9 h-9 rounded-md border border-white/10 flex items-center justify-center hover:border-amber-400 hover:text-amber-400"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+        <a href="#" aria-label="YouTube" class="w-9 h-9 rounded-md border border-white/10 flex items-center justify-center hover:border-amber-400 hover:text-amber-400"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-white font-semibold text-sm mb-4">Service Reminders</h4>
+      <p class="text-sm text-slate-500 mb-3">Get maintenance reminders and seasonal specials by email.</p>
+      <form class="flex gap-2" onsubmit="handleNewsletter(event)">
+        <label for="newsletterEmail" class="sr-only">Email address</label>
+        <input id="newsletterEmail" type="email" required placeholder="you@email.com"
+          class="min-w-0 flex-1 rounded-md bg-panel2 border border-white/10 px-3 py-2.5 text-sm text-white placeholder:text-slate-600 focus:border-amber-500" />
+        <button type="submit" class="shrink-0 px-4 py-2.5 rounded-md bg-amber-500 text-ink font-bold text-sm hover:bg-amber-400">Join</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <p class="text-xs text-slate-600">&copy; <span id="year"></span> Apex Auto Care. All rights reserved.</p>
+    <p class="text-xs text-slate-600">Riverside District &middot; (555) 123-4911</p>
+  </div>
+</footer>
+
+<!-- Sticky mobile call bar -->
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-panel border-t border-white/10 px-4 py-3 flex gap-3">
+  <a href="tel:+15551234911" class="flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-md border border-red-500/40 text-red-400 font-semibold text-sm"><i data-lucide="phone-call" class="w-4 h-4"></i>Call</a>
+  <a href="#booking" class="flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-md bg-amber-500 text-ink font-bold text-sm">Book Now</a>
+</div>
+<div class="h-16 lg:hidden"></div>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- Mobile menu ----------
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('menuIconOpen');
+  const iconClose = document.getElementById('menuIconClose');
+  let menuIsOpen = false;
+
+  menuBtn.addEventListener('click', () => {
+    menuIsOpen = !menuIsOpen;
+    menuBtn.setAttribute('aria-expanded', String(menuIsOpen));
+    if (menuIsOpen) {
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      mobileMenu.style.opacity = '1';
+      iconOpen.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+    } else {
+      mobileMenu.style.maxHeight = '0px';
+      mobileMenu.style.opacity = '0';
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    }
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuIsOpen = false;
+      mobileMenu.style.maxHeight = '0px';
+      mobileMenu.style.opacity = '0';
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ---------- Services data (single source of truth for grid + estimator) ----------
+  const SERVICES = [
+    { id: 'oil', name: 'Oil & Filter Change', icon: 'droplet', desc: 'Full synthetic oil, new filter, and a 21-point inspection.', time: '~45 min', price: 59 },
+    { id: 'brakes', name: 'Brake Service', icon: 'disc', desc: 'Pad replacement, rotor inspection, and fluid check.', time: '~2 hrs', price: 149 },
+    { id: 'diagnostics', name: 'Engine Diagnostics', icon: 'cpu', desc: 'Computer scan and physical inspection to isolate the issue.', time: '~1 hr', price: 89 },
+    { id: 'ceramic', name: 'Ceramic Coating / Paint Protection', icon: 'sparkles', desc: 'Multi-layer ceramic coating for lasting shine and protection.', time: '~1 day', price: 399 },
+    { id: 'ac', name: 'AC Repair', icon: 'wind', desc: 'Refrigerant recharge, leak check, and compressor diagnostics.', time: '~1.5 hrs', price: 119 },
+    { id: 'alignment', name: 'Tire Alignment', icon: 'move-horizontal', desc: 'Four-wheel alignment to correct pulling and uneven wear.', time: '~1 hr', price: 79 },
+  ];
+
+  // ---------- Render services grid ----------
+  const servicesGrid = document.getElementById('servicesGrid');
+  servicesGrid.innerHTML = SERVICES.map(s => `
+    <div class="group bg-panel border border-white/10 rounded-xl p-6 transition-all duration-200 hover:-translate-y-1 hover:border-amber-500/50 glow-amber">
+      <div class="w-11 h-11 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-ink transition-colors">
+        <i data-lucide="${s.icon}" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-white font-semibold mb-2">${s.name}</h3>
+      <p class="text-sm text-slate-500 mb-5 leading-relaxed">${s.desc}</p>
+      <div class="flex items-center justify-between text-sm border-t border-white/10 pt-4">
+        <span class="text-slate-500 flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i>${s.time}</span>
+        <span class="text-amber-400 font-semibold">From $${s.price}</span>
+      </div>
+    </div>
+  `).join('');
+
+  // ---------- Cost Estimator ----------
+  const checklistEl = document.getElementById('estimatorChecklist');
+  checklistEl.innerHTML = SERVICES.map(s => `
+    <label class="flex items-center justify-between gap-3 px-4 py-3 rounded-md border border-white/10 hover:border-amber-500/40 cursor-pointer">
+      <span class="flex items-center gap-3 text-sm text-slate-300">
+        <input type="checkbox" class="estimator-check w-4 h-4 accent-amber-500" data-price="${s.price}" />
+        ${s.name}
+      </span>
+      <span class="text-xs text-slate-500">$${s.price}</span>
+    </label>
+  `).join('');
+
+  let vehicleMultiplier = 1;
+  const vehicleButtons = document.querySelectorAll('.vehicle-btn');
+  vehicleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      vehicleButtons.forEach(b => {
+        b.classList.remove('border-amber-500', 'text-amber-400', 'bg-amber-500/10');
+        b.setAttribute('aria-checked', 'false');
+      });
+      btn.classList.add('border-amber-500', 'text-amber-400', 'bg-amber-500/10');
+      btn.setAttribute('aria-checked', 'true');
+      vehicleMultiplier = parseFloat(btn.dataset.multiplier);
+      updateEstimate();
+    });
+  });
+  // default select sedan
+  vehicleButtons[0].classList.add('border-amber-500', 'text-amber-400', 'bg-amber-500/10');
+
+  const totalEl = document.getElementById('estimatorTotal');
+  const countEl = document.getElementById('estimatorCount');
+
+  function updateEstimate() {
+    const checks = document.querySelectorAll('.estimator-check:checked');
+    let sum = 0;
+    checks.forEach(c => sum += parseFloat(c.dataset.price));
+    const total = Math.round(sum * vehicleMultiplier);
+    totalEl.textContent = '$' + total.toLocaleString();
+    countEl.textContent = checks.length + (checks.length === 1 ? ' service selected' : ' services selected');
+  }
+
+  document.addEventListener('change', (e) => {
+    if (e.target.classList.contains('estimator-check')) updateEstimate();
+  });
+
+  // ---------- Package selection -> scroll to booking, prefill service ----------
+  function selectPackage(name) {
+    const select = document.getElementById('serviceNeeded');
+    let opt = Array.from(select.options).find(o => o.value === name);
+    if (!opt) {
+      opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      select.appendChild(opt);
+    }
+    select.value = name;
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ---------- Form handlers ----------
+  function handleBooking(e) {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    alert(`Thanks! We'll confirm your ${data.get('serviceNeeded')} appointment for ${data.get('prefDate')} by calling ${data.get('phone')}.`);
+    e.target.reset();
+  }
+
+  function handleNewsletter(e) {
+    e.preventDefault();
+    alert('Subscribed! Watch your inbox for maintenance reminders.');
+    e.target.reset();
+  }
+
+  lucide.createIcons();
+</script>
+
+</body>
+</html>
