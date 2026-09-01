@@ -4,7 +4,7 @@
 
 const { applyCors } = require("../lib/cors");
 
-const API_VERSION = "1.0.0";
+const API_VERSION = "2.0.0-verified-deploy";
 
 module.exports = (req, res) => {
   if (applyCors(req, res)) return;
